@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Weather.Views.CityDetailPage"
+             xmlns:vm="clr-namespace:Weather.ViewModels"
+             xmlns:crsh="clr-namespace:Weather"
+             Title="City Detail"
+             BackgroundColor="AliceBlue"
+             BackgroundImageSource="background.jpg"
+             >
+    <ContentPage.BindingContext>
+        <vm:CityDetailsViewModel/>
+    </ContentPage.BindingContext>
+
+    
+
+        <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Label Grid.Row="0" Grid.Column="0" Text="{Binding CityName}"
+                       HorizontalTextAlignment="Center" 
+                       FontSize="40" FontAttributes="Bold" 
+                       TextColor="Black"/>
+            </Grid>
+        <Grid Grid.Row="1">
+            <crsh:CityDetailsShadowEffect Grid.Row="0" Grid.Column="0" Text="Today" 
+                                          VerticalOptions="Center"
+                                          HorizontalOptions="Center" 
+                                          FontSize="15"
+                                          LabelShadow="5"/>
+            <crsh:CityDetailsShadowEffect Grid.Row="0" Grid.Column="2" 
+                                          Text="{Binding SelectedCity.Temprature}" 
+                                          LabelShadow="8"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center" FontSize="Title" TextColor="Black"/>      
+        </Grid>
+            <Grid Grid.Row="2">
+            <crsh:CityDetailsShadowEffect Grid.Row="0" Grid.Column="0" Text="Humididty" VerticalOptions="Center"
+                       HorizontalOptions="Center" FontSize="15"/>
+            <crsh:CityDetailsShadowEffect Grid.Row="0" Grid.Column="2"
+                                          Text="{Binding SelectedCity.Humidity}" 
+                                          LabelShadow="6"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center" FontSize="Title" TextColor="Black"/>  
+        </Grid>
+            <Grid Grid.Row="3">
+            <crsh:CityDetailsShadowEffect Grid.Row="0" Grid.Column="0" 
+                                          Text="Wind Speed" VerticalOptions="Center"
+                                          LabelShadow="5"
+                                          HorizontalOptions="Center" FontSize="15"/>
+            <crsh:CityDetailsShadowEffect Grid.Row="0" Grid.Column="2" 
+                                          Text="{Binding SelectedCity.Wind}" 
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center" 
+                                           LabelShadow="8"
+                                           FontSize="Title" TextColor="Black"/>  
+        </Grid>
+
+
+
+        </Grid>
+
+    
+</ContentPage>

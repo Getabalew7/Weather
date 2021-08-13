@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Weather.Views.CityListPage"
+             xmlns:vm="clr-namespace:Weather.ViewModels"
+             xmlns:local="clr-namespace:Weather.Views" 
+             xmlns:crTemp="clr-namespace:Weather"
+             Title="City List"
+             BackgroundImageSource="background.jpg">
+
+    <ContentPage.BindingContext>
+        <vm:CityListViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+        <DataTemplate x:Key="CurrentCityTemplate">
+            <Grid
+                Margin="5" Padding="5"
+                BackgroundColor="Yellow">
+                <Label
+                    Padding="5,0,0,0"
+                    Grid.ColumnSpan="2"
+                    Text="{Binding Name} "
+                    VerticalTextAlignment="Center"
+                    FontSize="Title"
+                    TextColor="Black"/>
+                <Label
+                    Grid.Row="1"
+                    Padding="5,0,0,0"
+                    Text="{Binding Country} "
+                    VerticalTextAlignment="Center"
+                    TextColor="Black"/>
+             
+                <crTemp:ThermometerView
+                    Grid.Row="1" Grid.Column="1"
+                    CornerRadius="10"
+                    VerticalTextAlignment="Center"
+                    Padding="5,0,0,0"
+                    FontSize="Title"
+                    Text="{Binding Temprature}"
+                    TextColor="red"
+                    />
+                <!--<Label.GestureRecognizers>
+                                    <TapGestureRecognizer Com mand="{Binding SelctCityCommand}"/>
+                                </Label.GestureRecognizers>-->
+
+              
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="DefaultCityTemplate">
+            <Grid
+                Margin="5" Padding="5"
+                BackgroundColor="LightBlue">
+                <Label
+                    Padding="5,0,0,0"
+                    Grid.ColumnSpan="2"
+                    Text="{Binding Name} "
+                    VerticalTextAlignment="Center"
+                    FontSize="Title"
+                    TextColor="Black"/>
+                <Label
+                    Grid.Row="1"
+                    Padding="5,0,0,0"
+                    Text="{Binding Country} "
+                    VerticalTextAlignment="Center"
+                    TextColor="Black"
+                    />
+                <crTemp:ThermometerView
+                    Grid.Row="1" Grid.Column="1"
+                    CornerRadius="10"
+                    VerticalTextAlignment="Center"
+                    Padding="5,0,0,0"
+                    FontSize="Title"
+                    Text="{Binding Temprature}"
+                    TextColor="red"
+                    />
+                <!--<Label.GestureRecognizers>
+                                    <TapGestureRecognizer Com mand="{Binding SelctCityCommand}"/>
+                                </Label.GestureRecognizers>-->
+
+
+            </Grid>
+        </DataTemplate>
+        <local:CityDataTemplateSelector
+            x:Key="CityDataTemplateSelector"
+            CurrentTemplate="{StaticResource CurrentCityTemplate}"
+            DefaultTemplate="{StaticResource DefaultCityTemplate}"/>
+    </ContentPage.Resources>
+
+    <Grid>
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView 
+                Margin="8"
+                ItemsSource="{Binding cities}" 
+                SelectionChangedCommand="{Binding SelecteCityCommand}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedCity, Mode=TwoWay}"
+                ItemTemplate="{StaticResource CityDataTemplateSelector}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                 Span="2" 
+                                 HorizontalItemSpacing="8"
+                                 VerticalItemSpacing="8"></GridItemsLayout>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </RefreshView>
+        <!--<Label Grid.Row="2" TextColor="Black" Text="{Binding Message}"/>
+        <Entry Grid.Row="3"
+               TextColor="Black"
+               Text="{Binding Query} "/>
+        <Button Grid.Row="4"
+                Command="{Binding RefreshCommand}"
+                Text="Refresh">
+            
+        </Button>-->
+    </Grid>
+
+</ContentPage>
